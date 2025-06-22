@@ -1,0 +1,55 @@
+.recent-container {
+  padding: 40px;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.recent-container h2 {
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.transaction-card {
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
+  padding: 15px;
+  margin: 10px 0;
+  border-left: 6px solid #0077cc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-card .desc {
+  color: #555;
+  font-size: 14px;
+}
+
+.transaction-card button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.transaction-card button:hover {
+  background-color: #cc0000;
+}
+
+.back-link {
+  margin-top: 20px;
+  color: #0077cc;
+  cursor: pointer;
+}

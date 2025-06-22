@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API from "../api";
+import "./Login.css";
+
+const Login = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await API.post("/auth/login", form);
+      localStorage.setItem("token", res.data.accessToken);
+      navigate("/");
+    } catch (err) {
+      alert("Login failed. Try again.");
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <form onSubmit={handleSubmit} className="auth-form">
+        <h2>Login</h2>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Login</button>
+        <p onClick={() => navigate("/signup")}>Don't have an account? Signup</p>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
