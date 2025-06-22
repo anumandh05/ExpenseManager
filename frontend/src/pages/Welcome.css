@@ -1,0 +1,48 @@
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.welcome-box {
+  text-align: center;
+  background-color: #fff;
+  padding: 40px 60px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-box h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.welcome-box button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.2s ease;
+}
+
+.welcome-box button:hover {
+  background-color: #1b5e20;
+}
+
+.welcome-box p {
+  font-size: 14px;
+  color: #444;
+}
+
+.signin-link {
+  color: #1976d2;
+  cursor: pointer;
+  font-weight: bold;
+}

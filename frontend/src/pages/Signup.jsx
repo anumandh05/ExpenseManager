@@ -16,19 +16,19 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    console.log("Sending form data:", form); // 🔍 log form data
-    const res = await API.post("/auth/signup", form);
-    console.log("Signup success:", res.data); // 🔍 log response
-    localStorage.setItem("token", res.data.accessToken);
-    navigate("/");
-  } catch (err) {
-    console.error("Signup error:", err.response?.data || err.message);
-    alert("Signup failed. Try again.");
-  }
-};
-
+    e.preventDefault();
+    try {
+      console.log("Sending form data:", form);
+      const res = await API.post("/auth/signup", form);
+      console.log("Signup success:", res.data);
+      localStorage.setItem("token", res.data.accessToken);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Signup error:", err);
+      // ✅ Show backend error message, if available
+      alert(err.response?.data?.error || "Signup failed. Try again.");
+    }
+  };
 
   return (
     <div className="auth-container">

@@ -19,9 +19,10 @@ const Login = () => {
     try {
       const res = await API.post("/auth/login", form);
       localStorage.setItem("token", res.data.accessToken);
-      navigate("/");
+      navigate("/dashboard"); // redirect to dashboard
     } catch (err) {
-      alert("Login failed. Try again.");
+      console.error("Login error:", err);
+      alert(err.response?.data?.error || "Login failed. Try again.");
     }
   };
 
@@ -45,8 +46,8 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Login</button>
-        <p onClick={() => navigate("/signup")}>Don't have an account? Signup</p>
+        <button type="submit">Sign In</button>
+        <p onClick={() => navigate("/signup")}>Don't have an account? Sign Up</p>
       </form>
     </div>
   );

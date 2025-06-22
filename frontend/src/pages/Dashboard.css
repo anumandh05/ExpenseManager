@@ -1,32 +1,46 @@
 .dashboard-container {
+  padding: 30px;
   text-align: center;
-  padding-top: 100px;
-  background-color: #f7f9fb;
+  background-color: #f4f4f4;
   height: 100vh;
 }
 
-.dashboard-container h1 {
-  font-size: 28px;
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 40px;
 }
 
-.dashboard-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
 }
 
-.dashboard-buttons button {
-  padding: 12px 20px;
-  font-size: 16px;
-  background-color: #0077cc;
+.logout-btn {
+  background-color: #c62828;
   color: white;
   border: none;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.dashboard-buttons button:hover {
-  background-color: #005fa3;
+.summary-section {
+  margin: 30px 0;
+}
+
+.summary-section p {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.add-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }

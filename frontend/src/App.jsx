@@ -1,21 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import AddTransaction from './pages/AddTransaction';
-import RecentTransactions from './pages/RecentTransactions';
-import PrivateRoute from './components/PrivateRoute';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
+import AddTransaction from "./pages/AddTransaction";
+import RecentTransactions from "./pages/RecentTransactions";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Welcome />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-        <Route path="/add" element={<PrivateRoute><AddTransaction /></PrivateRoute>} />
-        <Route path="/recent" element={<PrivateRoute><RecentTransactions /></PrivateRoute>} />
+
+        {/* Protected Routes */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/add" element={<AddTransaction />} />
+          <Route path="/recent" element={<RecentTransactions />} />
+        </Route>
       </Routes>
     </Router>
   );
