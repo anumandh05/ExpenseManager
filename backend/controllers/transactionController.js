@@ -1,41 +1,75 @@
-const Transaction = require('../models/transactionModel');
+// backend/controllers/transactionController.js
+const Transaction = require("../models/transactionModel");
+const User = require("../models/userModel");
 
-// Add new transaction
+// Add Transaction
 exports.addTransaction = async (req, res) => {
   try {
     const { type, amount, description } = req.body;
+    const userId = req.user.id;
 
-    const newTransaction = new Transaction({
-      userId: req.user.id,
+    const transaction = new Transaction({
+      userId,
       type,
       amount,
       description,
     });
+    await transaction.save();
 
-    await newTransaction.save();
-    res.status(201).send({ message: "Transaction added", transaction: newTransaction });
-  } catch (error) {
-    res.status(500).send({ error: "Failed to add transaction" });
+    // Update user's balance
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    if (type === "income") {
+      user.balance += Number(amount);
+    } else if (type === "expense") {
+      user.balance -= Number(amount);
+    }
+
+    await user.save();
+
+    res.status(201).json({ message: "Transaction added", transaction });
+  } catch (err) {
+    console.error("Add Transaction Error:", err);
+    res.status(500).json({ error: "Failed to add transaction" });
   }
 };
 
-// Get all transactions for logged-in user
+// Get All Transactions for a User
 exports.getTransactions = async (req, res) => {
   try {
-    const transactions = await Transaction.find({ userId: req.user.id }).sort({ createdAt: -1 });
-    res.status(200).send({ transactions });
-  } catch (error) {
-    res.status(500).send({ error: "Failed to fetch transactions" });
+    const transactions = await Transaction.find({ userId: req.user.id });
+    res.status(200).json({ transactions });
+  } catch (err) {
+    console.error("Get Transactions Error:", err);
+    res.status(500).json({ error: "Failed to fetch transactions" });
   }
 };
 
-// Delete a transaction by ID
+// Delete Transaction & Update Balance
 exports.deleteTransaction = async (req, res) => {
   try {
     const { id } = req.params;
-    await Transaction.deleteOne({ _id: id, userId: req.user.id });
-    res.status(200).send({ message: "Transaction deleted" });
-  } catch (error) {
-    res.status(500).send({ error: "Failed to delete transaction" });
+    const transaction = await Transaction.findById(id);
+
+    if (!transaction) {
+      return res.status(404).json({ error: "Transaction not found" });
+    }
+
+    // Adjust balance
+    const user = await User.findById(transaction.userId);
+    if (transaction.type === "income") {
+      user.balance -= Number(transaction.amount);
+    } else {
+      user.balance += Number(transaction.amount);
+    }
+
+    await user.save();
+    await transaction.deleteOne();
+
+    res.status(200).json({ message: "Transaction deleted" });
+  } catch (err) {
+    console.error("Delete Transaction Error:", err);
+    res.status(500).json({ error: "Failed to delete transaction" });
   }
 };
