@@ -1,7 +1,8 @@
+// src/pages/RecentTransactions.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "../.Styling/RecentTransactions.css";
+import "../../Styling/RecentTransactions.css"; 
 
 const RecentTransactions = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const RecentTransactions = () => {
   const fetchTransactions = async () => {
     try {
       const res = await API.get("/transactions");
-      setTransactions(res.data.transactions.reverse()); // recent first
+      setTransactions(res.data.transactions.reverse()); // latest first
     } catch (err) {
       alert("Failed to fetch transactions.");
     }
@@ -20,9 +21,9 @@ const RecentTransactions = () => {
     if (window.confirm("Delete this transaction?")) {
       try {
         await API.delete(`/transactions/${id}`);
-        fetchTransactions(); // refresh list
+        fetchTransactions(); // refresh list after deletion
       } catch (err) {
-        alert("Failed to delete.");
+        alert("Failed to delete transaction.");
       }
     }
   };
@@ -34,6 +35,7 @@ const RecentTransactions = () => {
   return (
     <div className="recent-container">
       <h2>Recent Transactions</h2>
+
       <div className="transaction-list">
         {transactions.length === 0 ? (
           <p>No transactions found.</p>
@@ -50,7 +52,8 @@ const RecentTransactions = () => {
           ))
         )}
       </div>
-      <p onClick={() => navigate("/")} className="back-link">
+
+      <p onClick={() => navigate("/dashboard")} className="back-link">
         ← Back to Dashboard
       </p>
     </div>

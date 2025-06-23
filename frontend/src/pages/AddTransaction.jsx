@@ -1,7 +1,8 @@
+// src/pages/AddTransaction.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "../../Styling/AddTransaction.css";
+import "../../Styling/AddTransaction.css"; 
 
 const AddTransaction = () => {
   const navigate = useNavigate();
@@ -20,9 +21,10 @@ const AddTransaction = () => {
     try {
       await API.post("/transactions", transaction);
       alert("Transaction added!");
-      navigate("/recent");
+      navigate("/dashboard"); // ✅ go to dashboard after adding
     } catch (err) {
       alert("Failed to add transaction.");
+      console.error(err);
     }
   };
 
@@ -60,7 +62,7 @@ const AddTransaction = () => {
         />
 
         <button type="submit">Add ➜</button>
-        <p onClick={() => navigate("/")} className="back-link">
+        <p onClick={() => navigate("/dashboard")} className="back-link">
           ← Back to Dashboard
         </p>
       </form>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
+import "../../Styling/SetBalance.css"; 
 
 const SetBalance = () => {
   const [balance, setBalance] = useState("");
@@ -10,13 +11,7 @@ const SetBalance = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      const res = await API.post(
-        "/users/balance",
-        { balance },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log("Balance saved:", res.data);
+      await API.post("/users/balance", { balance });
       navigate("/dashboard");
     } catch (err) {
       console.error("Failed to save balance:", err);
