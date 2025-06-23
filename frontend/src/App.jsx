@@ -7,6 +7,7 @@ import AddTransaction from "./pages/AddTransaction";
 import RecentTransactions from "./pages/RecentTransactions";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import SetBalance from "./pages/SetBalance";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add" element={<AddTransaction />} />
           <Route path="/recent" element={<RecentTransactions />} />
+          <Route path="/set-balance" element={<SetBalance />} />
         </Route>
       </Routes>
     </Router>

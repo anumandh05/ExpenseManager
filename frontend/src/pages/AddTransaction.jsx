@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "./AddTransaction.css";
+import "../../Styling/AddTransaction.css";
 
 const AddTransaction = () => {
   const navigate = useNavigate();

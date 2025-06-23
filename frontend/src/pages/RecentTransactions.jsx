@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "./RecentTransactions.css";
+import "../.Styling/RecentTransactions.css";
 
 const RecentTransactions = () => {
   const navigate = useNavigate();
