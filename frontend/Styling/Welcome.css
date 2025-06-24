@@ -1,67 +1,47 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .welcome-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #f2f2f2;
 }
 
 .welcome-box {
-  background-color: white;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 400px;
-  width: 100%;
+  background-color: #fff;
+  padding: 170px 400px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-box h1 {
-  font-size: 32px;
+  font-size: 50px;
+  margin-bottom: 50px;
   color: #333;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
 }
 
 .welcome-box button {
-  background: #2575fc;
+  padding: 20px 40px;
+  font-size: 20px;
+  background-color: #2e7d32;
   color: white;
   border: none;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .welcome-box button:hover {
-  background: #1a5ed7;
+  background-color: #1b5e20;
 }
 
 .welcome-box p {
   font-size: 14px;
-  margin-top: 15px;
   color: #444;
 }
 
 .signin-link {
-  color: #2575fc;
-  font-weight: bold;
+  color: #1976d2;
   cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.signin-link:hover {
-  color: #1a5ed7;
+  font-weight: bold;
 }
