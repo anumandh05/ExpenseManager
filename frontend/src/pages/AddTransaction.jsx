@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "../../Styling/AddTransaction.css"; 
+import "../../Styling/AddTransaction.css";
 
 const AddTransaction = () => {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ const AddTransaction = () => {
     type: "expense",
     amount: "",
     description: "",
+    date: "",
   });
 
   const handleChange = (e) => {
@@ -20,10 +21,9 @@ const AddTransaction = () => {
     try {
       await API.post("/transactions", transaction);
       alert("Transaction added!");
-      navigate("/dashboard");
+      navigate("/recent");
     } catch (err) {
       alert("Failed to add transaction.");
-      console.error(err);
     }
   };
 
@@ -56,6 +56,14 @@ const AddTransaction = () => {
           name="description"
           placeholder="Description"
           value={transaction.description}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="date"
+          name="date"
+          value={transaction.date}
           onChange={handleChange}
           required
         />

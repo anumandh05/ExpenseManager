@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
-import "../../Styling/RecentTransactions.css"; 
+import "../../Styling/RecentTransactions.css";
 
 const RecentTransactions = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const RecentTransactions = () => {
         await API.delete(`/transactions/${id}`);
         fetchTransactions();
       } catch (err) {
-        alert("Failed to delete transaction.");
+        alert("Failed to delete.");
       }
     }
   };
@@ -34,7 +34,6 @@ const RecentTransactions = () => {
   return (
     <div className="recent-container">
       <h2>Recent Transactions</h2>
-
       <div className="transaction-list">
         {transactions.length === 0 ? (
           <p>No transactions found.</p>
@@ -45,13 +44,14 @@ const RecentTransactions = () => {
                 <strong>{t.type.toUpperCase()}</strong>: ₹{t.amount}
                 <br />
                 <span className="desc">{t.description}</span>
+                <br />
+                <span className="date">Date: {new Date(t.date).toLocaleDateString()}</span>
               </div>
               <button onClick={() => handleDelete(t._id)}>Delete</button>
             </div>
           ))
         )}
       </div>
-
       <p onClick={() => navigate("/dashboard")} className="back-link">
         ← Back to Dashboard
       </p>

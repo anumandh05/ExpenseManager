@@ -1,19 +1,26 @@
 const Transaction = require("../models/transactionModel");
 const User = require("../models/userModel");
 
+// Add Transaction
 exports.addTransaction = async (req, res) => {
   try {
-    const { type, amount, description } = req.body;
+    const { type, amount, description, date } = req.body; // ✅ include `date`
     const userId = req.user.id;
+
+    if (!type || !amount || !description || !date) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
 
     const transaction = new Transaction({
       userId,
       type,
       amount,
       description,
+      date, // ✅ Save date
     });
     await transaction.save();
 
+    // Update balance in User
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
@@ -32,9 +39,10 @@ exports.addTransaction = async (req, res) => {
   }
 };
 
+// Get Transactions
 exports.getTransactions = async (req, res) => {
   try {
-    const transactions = await Transaction.find({ userId: req.user.id });
+    const transactions = await Transaction.find({ userId: req.user.id }).sort({ date: -1 });
     res.status(200).json({ transactions });
   } catch (err) {
     console.error("Get Transactions Error:", err);
@@ -42,6 +50,7 @@ exports.getTransactions = async (req, res) => {
   }
 };
 
+// Delete Transaction
 exports.deleteTransaction = async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,8 +60,10 @@ exports.deleteTransaction = async (req, res) => {
       return res.status(404).json({ error: "Transaction not found" });
     }
 
-    
     const user = await User.findById(transaction.userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Adjust balance
     if (transaction.type === "income") {
       user.balance -= Number(transaction.amount);
     } else {
