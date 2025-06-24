@@ -1,8 +1,6 @@
-// backend/controllers/transactionController.js
 const Transaction = require("../models/transactionModel");
 const User = require("../models/userModel");
 
-// Add Transaction
 exports.addTransaction = async (req, res) => {
   try {
     const { type, amount, description } = req.body;
@@ -16,7 +14,6 @@ exports.addTransaction = async (req, res) => {
     });
     await transaction.save();
 
-    // Update user's balance
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
@@ -35,7 +32,6 @@ exports.addTransaction = async (req, res) => {
   }
 };
 
-// Get All Transactions for a User
 exports.getTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user.id });
@@ -46,7 +42,6 @@ exports.getTransactions = async (req, res) => {
   }
 };
 
-// Delete Transaction & Update Balance
 exports.deleteTransaction = async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,7 +51,7 @@ exports.deleteTransaction = async (req, res) => {
       return res.status(404).json({ error: "Transaction not found" });
     }
 
-    // Adjust balance
+    
     const user = await User.findById(transaction.userId);
     if (transaction.type === "income") {
       user.balance -= Number(transaction.amount);

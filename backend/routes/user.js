@@ -1,10 +1,8 @@
-// backend/routes/user.js
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/authMiddleware');
 const User = require('../models/userModel');
 
-// ✅ Set or update balance
 router.post('/balance', authMiddleware, async (req, res) => {
   try {
     const { balance } = req.body;

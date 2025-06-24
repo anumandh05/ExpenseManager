@@ -1,8 +1,6 @@
-// backend/controllers/authController.js
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
-// Signup
 exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -28,7 +26,6 @@ exports.signup = async (req, res) => {
   }
 };
 
-// Login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -50,7 +47,6 @@ exports.login = async (req, res) => {
   }
 };
 
-// ✅ Get User Details
 exports.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("username email balance");

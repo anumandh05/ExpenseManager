@@ -1,4 +1,3 @@
-// src/pages/RecentTransactions.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
@@ -11,7 +10,7 @@ const RecentTransactions = () => {
   const fetchTransactions = async () => {
     try {
       const res = await API.get("/transactions");
-      setTransactions(res.data.transactions.reverse()); // latest first
+      setTransactions(res.data.transactions.reverse());
     } catch (err) {
       alert("Failed to fetch transactions.");
     }
@@ -21,7 +20,7 @@ const RecentTransactions = () => {
     if (window.confirm("Delete this transaction?")) {
       try {
         await API.delete(`/transactions/${id}`);
-        fetchTransactions(); // refresh list after deletion
+        fetchTransactions();
       } catch (err) {
         alert("Failed to delete transaction.");
       }

@@ -1,4 +1,3 @@
-// src/pages/AddTransaction.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
@@ -21,7 +20,7 @@ const AddTransaction = () => {
     try {
       await API.post("/transactions", transaction);
       alert("Transaction added!");
-      navigate("/dashboard"); // ✅ go to dashboard after adding
+      navigate("/dashboard");
     } catch (err) {
       alert("Failed to add transaction.");
       console.error(err);

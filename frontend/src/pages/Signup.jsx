@@ -25,7 +25,6 @@ const Signup = () => {
       navigate("/dashboard");
     } catch (err) {
       console.error("Signup error:", err);
-      // ✅ Show backend error message, if available
       alert(err.response?.data?.error || "Signup failed. Try again.");
     }
   };

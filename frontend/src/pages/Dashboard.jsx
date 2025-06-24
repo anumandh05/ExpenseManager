@@ -20,11 +20,9 @@ const Dashboard = () => {
         const resTransactions = await API.get("/transactions");
         const allTransactions = resTransactions.data.transactions || [];
 
-        // Sort by latest and slice the top 3
         const recent = allTransactions.reverse().slice(0, 3);
         setRecentTransactions(recent);
 
-        // Income and expenses total
         const incomeTotal = allTransactions
           .filter((t) => t.type === "income")
           .reduce((acc, t) => acc + Number(t.amount), 0);
@@ -94,7 +92,6 @@ const Dashboard = () => {
         Add Transaction →
       </button>
 
-      {/* Recent Transactions Section */}
       <div className="recent-preview">
         <h3>Recent Transactions</h3>
         {recentTransactions.length === 0 ? (

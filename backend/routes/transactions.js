@@ -7,7 +7,6 @@ const {
   deleteTransaction,
 } = require("../controllers/transactionController");
 
-// All routes protected
 router.post("/", authMiddleware, addTransaction);
 router.get("/", authMiddleware, getTransactions);
 router.delete("/:id", authMiddleware, deleteTransaction);
